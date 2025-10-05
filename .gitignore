@@ -1,0 +1,10 @@
+# Version control.
+.git/
+.jj/
+
+# MacOS leaves these around.
+*.DS_STORE
+
+# Rust build outputs.
+target/
+debug/
