@@ -1,0 +1,10 @@
+[package]
+name = "ck-snes-gui"
+authors.workspace = true
+edition.workspace = true
+version.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
+ck-snes-core = { workspace = true }
