@@ -1,3 +1,6 @@
+use ck_snes_core::cpu::Cpu;
+
 fn main() {
-    println!("{}", ck_snes_core::MESSAGE);
+    let cpu = Cpu::new();
+    println!("{:?}", &cpu);
 }
