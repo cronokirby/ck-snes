@@ -14,3 +14,4 @@ license = "MIT"
 
 [workspace.dependencies]
 ck-snes-core = { path = "lib/ck-snes-core" }
+proptest = "1.8.0"
