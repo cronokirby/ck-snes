@@ -1,5 +1,5 @@
 /// A 24 bit unsigned integer.
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub struct U24(u32);
 
 impl U24 {
@@ -23,6 +23,12 @@ impl From<(u16, u8)> for U24 {
 impl From<U24> for (u16, u8) {
     fn from(x: U24) -> Self {
         x.into_lo_hi()
+    }
+}
+
+impl From<U24> for usize {
+    fn from(x: U24) -> Self {
+        x.0 as usize
     }
 }
 
