@@ -2,7 +2,8 @@
 resolver = "2"
 members = [
   "bin/ck-snes-gui",
-  "lib/ck-snes-core"
+  "lib/ck-snes-asm",
+  "lib/ck-snes-core",
 ]
 
 [workspace.package]
