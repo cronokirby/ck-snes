@@ -6,6 +6,9 @@ version.workspace = true
 repository.workspace = true
 license.workspace = true
 
+[package.metadata]
+no_std = true
+
 [dependencies]
 
 [dev-dependencies]

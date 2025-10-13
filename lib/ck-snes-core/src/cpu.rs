@@ -64,7 +64,7 @@ mod test {
                     if at >= rom.len() {
                         break;
                     }
-                    bus.reply_read(rom[usize::from(at)]);
+                    bus.reply_read(rom[at]);
                 }
                 Bus::AskWrite(_, _) => {
                     unimplemented!("ROM write");
