@@ -9,3 +9,6 @@
 # (That said, populate this with "use flake").
 .envrc
 .direnv/
+
+# Junk produced by VHDL compilation.
+*.cf

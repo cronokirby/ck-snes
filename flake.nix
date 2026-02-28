@@ -14,6 +14,8 @@
       {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
+            # Command runner.
+            just
             # Tooling for VHDL.
             ghdl
             # HDL synthesis and simulation with yosys.
