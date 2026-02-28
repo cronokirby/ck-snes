@@ -14,12 +14,16 @@
       {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            # HDL synthesis and simulation tooling.
-            yosys
             # Tooling for VHDL.
             ghdl
-            # Plugin to integrate ghdl into yosys.
-            yosys-ghdl
+            # HDL synthesis and simulation with yosys.
+            #
+            # We also wrap it to include the necessary plugins for VHDL.
+            (pkgs.writeShellScriptBin "yosys" ''
+              exec ${pkgs.yosys}/bin/yosys \
+                -m ${pkgs.yosys-ghdl}/share/yosys/plugins/ghdl.so \
+                "$@"
+            '')
           ]; 
         };
       }
