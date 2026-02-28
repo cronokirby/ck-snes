@@ -12,3 +12,9 @@
 
 # Junk produced by VHDL compilation.
 *.cf
+
+# Python / pytest / cocotb artifacts.
+__pycache__/
+*.pyc
+.pytest_cache/
+sim_build/

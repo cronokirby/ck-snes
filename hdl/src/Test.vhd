@@ -3,6 +3,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity Test is
+  generic (
+    BITS : positive := 25
+  );
   port (
     clk : in std_logic;
     led : out std_logic
@@ -10,7 +13,7 @@ entity Test is
 end Test;
 
 architecture bhv of Test is
-  signal counter : unsigned(24 downto 0) := (others => '0');
+  signal counter : unsigned(BITS - 1 downto 0) := (others => '0');
 begin
   process(clk)
   begin
@@ -18,5 +21,5 @@ begin
       counter <= counter + 1;
     end if;
   end process;
-  led <= counter(24);
+  led <= counter(BITS - 1);
 end bhv;

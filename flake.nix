@@ -10,6 +10,15 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+
+        python = pkgs.python3.withPackages (pkgs': with pkgs'; [
+          # Python testing framework for HDL simulation.
+          cocotb
+          # Needed as well.
+          pytest
+          # Not entirely sure if this is needed, but Nix being weird might require this?
+          find-libpython
+        ]);
       in
       {
         devShells.default = pkgs.mkShell {
@@ -26,6 +35,8 @@
                 -m ${pkgs.yosys-ghdl}/share/yosys/plugins/ghdl.so \
                 "$@"
             '')
+            # Python tooling, for testing HDL.
+            python
           ]; 
         };
       }
