@@ -1,11 +1,11 @@
 library ieee;
-use ieee.std_log_1164.all;
+use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity Test is
   port (
     clk : in std_logic;
-    led : out std_logic;
+    led : out std_logic
   );
 end Test;
 
