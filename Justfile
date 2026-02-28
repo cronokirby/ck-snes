@@ -5,6 +5,7 @@ check:
 
 # Run tests
 test:
+    just check
     pytest hdl/test_suite.py
 
 # Build a bitstream for a target board.
