@@ -35,6 +35,11 @@
                 -m ${pkgs.yosys-ghdl}/share/yosys/plugins/ghdl.so \
                 "$@"
             '')
+            # ECP5 place-and-route + bitstream tools.
+            nextpnr
+            (pkgs.ecppack or pkgs.trellis)
+            # FPGA programmer.
+            openfpgaloader
             # Python tooling, for testing HDL.
             python
           ]; 
