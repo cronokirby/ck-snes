@@ -42,6 +42,8 @@
             openfpgaloader
             # Python tooling, for testing HDL.
             python
+            # Python linter/formatter.
+            ruff
           ]; 
         };
       }

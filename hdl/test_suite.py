@@ -15,7 +15,5 @@ def test():
     runner.test(
         hdl_toplevel="test",
         test_module="test.Test",
-        parameters={
-            "BITS": 3
-        }
+        parameters={"BITS": 3},
     )

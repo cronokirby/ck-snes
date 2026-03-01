@@ -2,6 +2,15 @@
 check:
     # Check all vhdl files, in isolation.
     ghdl -a --std=08 -Wall -Werror hdl/**/*.vhd
+    # Lint python.
+    ruff check
+    # Check python formatting.
+    ruff format --check
+
+# Fix formatting.
+fmt:
+    # Python formatting.
+    ruff format
 
 # Run tests
 test:
