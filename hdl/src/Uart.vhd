@@ -80,7 +80,7 @@ begin
               counter <= CLOCKS_PER_BIT - 1;
             end if;
           end if;
-        when SStop =>
+        when SSTop =>
           if counter = 0 then
             if rx_sync(1) = '1' then
               data_valid <= '1';

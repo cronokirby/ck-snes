@@ -18,6 +18,8 @@
           pytest
           # Not entirely sure if this is needed, but Nix being weird might require this?
           find-libpython
+          # Serial support for UART helper script.
+          pyserial
         ]);
       in
       {
