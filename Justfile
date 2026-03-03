@@ -9,6 +9,10 @@ check:
 
 # Fix formatting.
 fmt:
+    # VHDL formatting.
+    find hdl -name '*.vhd' -print0 | while IFS= read -r -d '' f; do \
+        ghdl fmt --std=08 "$f" > "$f".fmt && mv "$f".fmt "$f"; \
+    done
     # Python formatting.
     ruff format
 

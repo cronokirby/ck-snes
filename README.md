@@ -2,6 +2,8 @@
 
 I'm trying to write an SNES emulator.
 
+# Development
+
 ## ULX3S USB permissions (Linux)
 
 If `openFPGALoader` fails with a USB permission error, add a udev rule for the
@@ -24,3 +26,34 @@ Save as `/etc/udev/rules.d/99-ulx3s.rules`, then run:
 ```
 sudo udevadm control --reload-rules
 ```
+
+## Suggested Editor Config
+
+### Helix
+
+You can create a local `.helix` directory. A suggested `languages.toml` to put
+there would be:
+
+```toml
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.vhdl-ls]
+command = "vhdl_ls"
+
+[[language]]
+name = "python"
+language-servers = ["ruff"]
+auto-format = true
+formatter = { command = "ruff", args = ["format", "--stdin-filename", "tmp.py", "-"] }
+
+[[language]]
+name = "vhdl"
+file-types = ["vhd", "vhdl"]
+language-servers = ["vhdl-ls"]
+auto-format = true
+formatter = { command = "sh", args = ["-c", "tmp=$(mktemp); cat > \"$tmp\"; ghdl fmt --std=08 \"$tmp\"; rc=$?; rm -f \"$tmp\"; exit $rc"] }
+```
+
+The VHDL formatting requires a bit of a hack, because `ghdl` doesn't support stdin input.
