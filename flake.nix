@@ -27,6 +27,8 @@
             just
             # Tooling for VHDL.
             ghdl
+            # VHDL language server (rust_hdl).
+            vhdl-ls
             # HDL synthesis and simulation with yosys.
             #
             # We also wrap it to include the necessary plugins for VHDL.
