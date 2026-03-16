@@ -17,8 +17,13 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-sim_build/
-target/
+.venv/
+.ruff_cache/
 
 # Editor config
 .helix/
+
+# Results of loading things onto the FPGA.
+sim_build/
+target/
+
