@@ -48,6 +48,10 @@
             python
             # Python linter/formatter.
             ruff
+            # Rust tooling.
+            cargo
+            rustc
+            rust-analyzer
           ]; 
         };
       }
