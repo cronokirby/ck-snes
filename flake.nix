@@ -52,6 +52,10 @@
             cargo
             rustc
             rust-analyzer
+            # Needed for the `serialport` library
+            pkg-config
+            # See above: provides libudev
+            systemd
           ]; 
         };
       }
