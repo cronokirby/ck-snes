@@ -2,6 +2,12 @@
 check:
     # Check all vhdl files, in isolation.
     ghdl -a --std=08 -Wall -Werror hdl/**/*.vhd
+    # Check Rust formatting.
+    cargo fmt --all --check
+    # Lint Rust.
+    cargo clippy --all-targets --all-features -D warnings
+    # Check Rust.
+    cargo check
     # Lint python.
     ruff check
     # Check python formatting.
@@ -13,12 +19,16 @@ fmt:
     find hdl -name '*.vhd' -print0 | while IFS= read -r -d '' f; do \
         ghdl fmt --std=08 "$f" > "$f".fmt && mv "$f".fmt "$f"; \
     done
+    # Rust formatting.
+    cargo fmt --all
     # Python formatting.
     ruff format
 
 # Run tests
 test:
     just check
+    # Run Rust tests.
+    cargo test
     pytest hdl/test_suite.py
 
 # Build a bitstream for a target board.
