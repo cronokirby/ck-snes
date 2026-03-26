@@ -1,5 +1,5 @@
 [workspace]
-members = ["tools"]
+members = ["asm/ck-snes-asm", "tools"]
 resolver = "2"
 
 [workspace.dependencies]
