@@ -5,7 +5,7 @@ check:
     # Check Rust formatting.
     cargo fmt --all --check
     # Lint Rust.
-    cargo clippy --all-targets --all-features -D warnings
+    cargo clippy --all-targets --all-features -- -D warnings
     # Check Rust.
     cargo check
     # Lint python.

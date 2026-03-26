@@ -2,14 +2,14 @@ use std::io::{self, Write};
 
 const BAUD_RATE: u32 = 115200;
 
-fn read_line<'a>(buf: &'a mut String) -> anyhow::Result<&'a str> {
+fn read_line(buf: &mut String) -> anyhow::Result<&str> {
     buf.clear();
     let len = io::stdin().read_line(buf)?;
-    Ok(&buf[..len].trim_end())
+    Ok(buf[..len].trim_end())
 }
 
 fn read_index(buf: &mut String) -> anyhow::Result<Option<usize>> {
-    Ok(usize::from_str_radix(read_line(buf)?, 10).ok())
+    Ok(read_line(buf)?.parse().ok())
 }
 
 fn read_hex_byte(buf: &mut String) -> anyhow::Result<Option<u8>> {
