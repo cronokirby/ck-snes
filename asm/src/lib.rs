@@ -1,4 +1,105 @@
-use std::io;
+use std::{fmt::Display, io};
+
+#[allow(dead_code)]
+#[rustfmt::skip]
+#[repr(u8)]
+#[derive(Clone, Copy, Debug)]
+enum Op {
+    ADC, AND, ASL, BCC, BCS, BEQ, BIT, BMI,
+    BNE, BPL, BRA, BRK, BRL, BVC, BVS, CLC,
+    CLD, CLI, CLV, CMP, COP, CPX, CPY, DEC,
+    DEX, DEY, EOR, INC, INX, INY, JML, JMP,
+    JSL, JSR, LDA, LDX, LDY, LSR, MVN, MVP,
+    NOP, ORA, PEA, PEI, PER, PHA, PHB, PHD,
+    PHK, PHP, PHX, PHY, PLA, PLB, PLD, PLP,
+    PLX, PLY, REP, ROL, ROR, RTI, RTL, RTS,
+    SBC, SEC, SED, SEI, SEP, STA, STP, STX,
+    STY, STZ, TAX, TAY, TCD, TCS, TDC, TRB,
+    TSB, TSC, TSX, TXA, TXS, TXY, TYA, TYX,
+    WAI, WDM, XBA, XCE,
+}
+
+#[allow(dead_code)]
+#[repr(u8)]
+#[derive(Clone, Copy)]
+enum AddrMode {
+    Absolute,
+    AbsoluteIndexedIndirect,
+    AbsoluteIndirect,
+    AbsoluteLong,
+    AbsoluteLongIndexed,
+    AbsoluteX,
+    AbsoluteY,
+    Accumulator,
+    BlockMove,
+    Direct,
+    DirectIndexedIndirect,
+    DirectIndirect,
+    DirectIndirectLong,
+    DirectIndirectLongIndexed,
+    DirectIndirectIndexed,
+    DirectX,
+    DirectY,
+    Immediate,
+    Implied,
+    PcRel,
+    PcRelLong,
+    Stack,
+    StackRelative,
+    StackRelativeIndirectIndexed,
+}
+
+impl Display for AddrMode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}",
+            [
+                "a", "(a,x)", "(a)", "al", "al,x", "a,x", "a,y", "A", "xyc", "d", "(d,x)", "(d)",
+                "[d]", "[d],y", "(d),y", "d,x", "d,y", "#", "i", "r", "rl", "s", "d,s", "(d,s),y"
+            ][*self as u8 as usize]
+        )
+    }
+}
+
+#[derive(Clone, Copy)]
+struct Instruction {
+    pub op: Op,
+    pub mode: AddrMode,
+}
+
+const INSTRUCTION_TABLE: [Instruction; 256] = {
+    use AddrMode::*;
+    use Op::*;
+    const OPCODES: &[u8; 512] = include_bytes!("opcodes.bin");
+    let mut out = [Instruction {
+        op: WAI,
+        mode: Implied,
+    }; 256];
+    let mut i = 0;
+    while i < 256 {
+        out[i] = Instruction {
+            op: unsafe { core::mem::transmute(OPCODES[2 * i]) },
+            mode: unsafe { core::mem::transmute(OPCODES[2 * i + 1]) },
+        };
+        i += 1;
+    }
+    out
+};
+
+/// Prints a nice human-readable table of all the operations,
+pub fn print_instruction_table() {
+    for i in 0..16 {
+        for j in 0..16 {
+            print!("{:<4?}\t", INSTRUCTION_TABLE[(i << 4) | j].op);
+        }
+        println!("");
+        for j in 0..16 {
+            print!("{:<4}\t", INSTRUCTION_TABLE[(i << 4) | j].mode);
+        }
+        println!("\n");
+    }
+}
 
 /// This holds all of the data for a SNES game, including code, music, and graphics.
 pub struct Rom {

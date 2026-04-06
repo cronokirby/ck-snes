@@ -1,6 +1,6 @@
 use std::path::{Path, PathBuf};
 
-use ck_snes_asm::Rom;
+use ck_snes_asm::{print_instruction_table, Rom};
 use pico_args::Arguments;
 
 fn main() -> anyhow::Result<()> {
@@ -11,6 +11,10 @@ fn main() -> anyhow::Result<()> {
             Ok(())
         }
         Some("decompile") => decompile(args),
+        Some("instructions") => {
+            print_instruction_table();
+            Ok(())
+        }
         Some(other) => {
             println!("Unknown sub-command: {other}");
             print_help();
